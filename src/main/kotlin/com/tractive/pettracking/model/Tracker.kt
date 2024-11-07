@@ -2,6 +2,7 @@ package com.tractive.pettracking.model
 
 import com.tractive.pettracking.enum.TrackerType
 import jakarta.persistence.*
+import java.util.*
 
 @Entity
 class Tracker(
@@ -14,6 +15,6 @@ class Tracker(
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0
+    @GeneratedValue
+    val id: UUID = UUID.randomUUID()
 }
