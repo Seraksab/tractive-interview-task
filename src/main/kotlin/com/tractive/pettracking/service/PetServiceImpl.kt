@@ -1,6 +1,7 @@
 package com.tractive.pettracking.service
 
 import com.tractive.pettracking.dto.request.CreatePetDto
+import com.tractive.pettracking.dto.request.UpdateTrackerDataDto
 import com.tractive.pettracking.dto.response.PetDto
 import com.tractive.pettracking.enum.PetType
 import com.tractive.pettracking.extension.toDto
@@ -54,6 +55,19 @@ class PetServiceImpl(
         }
         petRepository.deleteById(id)
         logger.info("Pet deleted: {}", id)
+    }
+
+    @Transactional
+    override fun updateTrackerData(trackerId: UUID, dto: UpdateTrackerDataDto) {
+        val pet = petRepository.findPetByTrackerId(trackerId)
+            .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "Tracker not found") }
+
+        pet.inZone = dto.inZone
+        if (pet is Cat && dto.lostTracker != null) {
+            pet.lostTracker = dto.lostTracker
+        }
+
+        petRepository.save(pet)
     }
 
     private fun createPetEntity(dto: CreatePetDto, tracker: Tracker): Pet = when (dto.petType) {

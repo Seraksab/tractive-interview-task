@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface PetRepository : PagingAndSortingRepository<Pet, UUID>, ListCrudRepository<Pet, UUID>
+interface PetRepository : PagingAndSortingRepository<Pet, UUID>, ListCrudRepository<Pet, UUID> {
+
+    fun findPetByTrackerId(trackerId: UUID): Optional<Pet>
+}

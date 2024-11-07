@@ -9,7 +9,7 @@ class Cat(
     inZone: Boolean,
     tracker: Tracker,
 
-    val lostTracker: Boolean
+    var lostTracker: Boolean
 
     // + additional cat specific data like e.g.: breed, etc.
 

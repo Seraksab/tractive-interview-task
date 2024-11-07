@@ -18,7 +18,7 @@ abstract class Pet(
     @OneToOne(fetch = FetchType.EAGER)
     val tracker: Tracker,
 
-    val inZone: Boolean
+    var inZone: Boolean
 
     // + additional general pet data like e.g.: name, date of birth, etc.
 
