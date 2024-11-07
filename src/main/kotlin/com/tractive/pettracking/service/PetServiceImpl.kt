@@ -2,6 +2,7 @@ package com.tractive.pettracking.service
 
 import com.tractive.pettracking.dto.request.CreatePetDto
 import com.tractive.pettracking.dto.request.UpdateTrackerDataDto
+import com.tractive.pettracking.dto.response.OutsideZoneDto
 import com.tractive.pettracking.dto.response.PetDto
 import com.tractive.pettracking.enum.PetType
 import com.tractive.pettracking.extension.toDto
@@ -68,6 +69,10 @@ class PetServiceImpl(
         }
 
         petRepository.save(pet)
+    }
+
+    override fun countPetsOutsideZone(): List<OutsideZoneDto> {
+        return petRepository.countOutsideZoneByTypeAndTrackerType()
     }
 
     private fun createPetEntity(dto: CreatePetDto, tracker: Tracker): Pet = when (dto.petType) {

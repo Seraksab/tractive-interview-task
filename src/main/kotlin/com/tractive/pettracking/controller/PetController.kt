@@ -1,6 +1,7 @@
 package com.tractive.pettracking.controller
 
 import com.tractive.pettracking.dto.request.CreatePetDto
+import com.tractive.pettracking.dto.response.OutsideZoneDto
 import com.tractive.pettracking.dto.response.PetDto
 import com.tractive.pettracking.service.PetService
 import org.springframework.data.domain.Page
@@ -31,5 +32,10 @@ class PetController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletePet(@PathVariable petId: UUID) {
         petService.deletePetById(petId)
+    }
+
+    @GetMapping("/outsideZone", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun countOutsideZone(): List<OutsideZoneDto> {
+        return petService.countPetsOutsideZone()
     }
 }

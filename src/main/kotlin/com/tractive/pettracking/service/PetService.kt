@@ -2,6 +2,7 @@ package com.tractive.pettracking.service
 
 import com.tractive.pettracking.dto.request.CreatePetDto
 import com.tractive.pettracking.dto.request.UpdateTrackerDataDto
+import com.tractive.pettracking.dto.response.OutsideZoneDto
 import com.tractive.pettracking.dto.response.PetDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -18,4 +19,6 @@ interface PetService {
     fun deletePetById(id: UUID)
 
     fun updateTrackerData(trackerId: UUID, dto: UpdateTrackerDataDto)
+
+    fun countPetsOutsideZone(): List<OutsideZoneDto>
 }
