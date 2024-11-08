@@ -5,12 +5,9 @@ import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 abstract class Pet(
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected open val type: PetType,
 
     @Column(nullable = false)
     val ownerId: Int,
@@ -27,4 +24,8 @@ abstract class Pet(
     @Id
     @GeneratedValue
     val id: UUID = UUID.randomUUID()
+
+    @Enumerated(EnumType.STRING)
+    @Column(insertable = false, updatable = false)
+    lateinit var type: PetType
 }

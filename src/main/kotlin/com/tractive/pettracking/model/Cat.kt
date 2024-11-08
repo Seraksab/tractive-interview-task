@@ -1,9 +1,10 @@
 package com.tractive.pettracking.model
 
-import com.tractive.pettracking.enum.PetType
+import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
 @Entity
+@DiscriminatorValue("CAT")
 class Cat(
     ownerId: Int,
     inZone: Boolean,
@@ -13,4 +14,4 @@ class Cat(
 
     // + additional cat specific data like e.g.: breed, etc.
 
-) : Pet(PetType.CAT, ownerId, tracker, inZone)
+) : Pet(ownerId, tracker, inZone)
